@@ -1,7 +1,7 @@
 # Личный проект «TaskForce»
 
 * Студент: [Роман Анищенко](https://up.htmlacademy.ru/yii/1/user/769389).
-* Наставник: [Никита Медведев](https://htmlacademy.ru/profile/id1281715).
+* Наставник: [Evgeny Savich](https://htmlacademy.ru/profile/id68926).
 
 ---
 
