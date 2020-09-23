@@ -1,7 +1,7 @@
 # Личный проект «TaskForce»
 
 * Студент: [Роман Анищенко](https://up.htmlacademy.ru/yii/1/user/769389).
-* Наставник: `Неизвестно`.
+* Наставник: [Evgeny Savich](https://htmlacademy.ru/profile/id68926).
 
 ---
 
