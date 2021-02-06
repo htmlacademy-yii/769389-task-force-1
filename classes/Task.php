@@ -34,7 +34,6 @@ class Task
 
     protected $NextStatus = [
         self::ACTION_CANCEL => self::STATUS_CANCEL,
-        self::ACTION_ANSWER => null,
         self::ACTION_FINISHED => self::STATUS_DONE,
         self::ACTION_DECLINE => self::STATUS_FAILED,
         self::ACTION_ACCEPT => self::STATUS_IN_WORK,
@@ -48,9 +47,6 @@ class Task
             self::ROLE_IMPLEMENT => self::ACTION_DECLINE,
             self::ROLE_CUSTOMER => self::ACTION_FINISHED
         ],
-        self::STATUS_DONE => null,
-        self::STATUS_FAILED => null,
-        self::STATUS_CANCEL => null,
     ];
 
     protected $idTask = null;
@@ -64,18 +60,11 @@ class Task
 
     public function getNextStatus(string $action)
     {
-
-        if (!$action) {
-            return null;
-        }
-        return $this->NextStatus[$action];
+        return $this->nextStatus[$action] ?? null;
     }
 
     public function getNextAction(string $status, $user)
     {
-        if (!$status && !$user) {
-            return null;
-        }
-        return $this->nextAction[$status][$user];
+        return $this->nextAction[$status][$user] ?? null;
     }
 }
