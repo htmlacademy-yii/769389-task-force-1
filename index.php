@@ -1,9 +1,12 @@
 <?php
+
 error_reporting(E_ALL);
 set_exception_handler(function (Throwable $error) {
     echo sprintf('error: %s in file %s:%d', $error->getMessage(), $error->getFile(), $error->getLine());
 });
-include 'classes/Task.php';
+include 'vendor/autoload.php';
+use TaskForce\classes\Task;
+
 
 $obTask = new Task(1,2);
 $NextStatus = $obTask->getNextStatus(Task::ACTION_CANCEL);

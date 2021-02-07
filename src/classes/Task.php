@@ -1,5 +1,5 @@
 <?php
-
+namespace TaskForce\classes;
 class Task
 {
     // Стастусы задания
@@ -7,7 +7,7 @@ class Task
     const STATUS_IN_WORK = 'in_work'; // В работе
     const STATUS_DONE = 'done'; // Выполнено
     const STATUS_FAILED = 'failed'; // Провалено
-    const STATUS_CANCEL = 'cancel'; // Отменено
+    const STATUS_CANCEL = 'cancel'; // Отмененомф
     // Действия с заданием
     const ACTION_CANCEL = 'cancel'; // Отменить задание( Заказчик)
     const ACTION_ANSWER = 'answer'; // Откликнуться на задание(Исполнитель)
