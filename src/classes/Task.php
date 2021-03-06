@@ -40,17 +40,17 @@ class Task
         ];
     protected $nextAction = [
         self::STATUS_NEW => [
-            self::ROLE_IMPLEMENT => self::ACTION_ANSWER,
-            self::ROLE_CUSTOMER => self::ACTION_CANCEL
+            self::ROLE_IMPLEMENT => ActionRespond::class,
+            self::ROLE_CUSTOMER => ActionCancel::class
         ],
         self::STATUS_IN_WORK => [
-            self::ROLE_IMPLEMENT => self::ACTION_DECLINE,
-            self::ROLE_CUSTOMER => self::ACTION_FINISHED
+            self::ROLE_IMPLEMENT => ActionReject::class,
+            self::ROLE_CUSTOMER => ActionComplete::class
         ],
     ];
 
-    protected $idTask = null;
-    protected $idStatus = null;
+    protected int $idTask;
+    protected int $idStatus;
 
     public function __construct(int $idTask, int $idStatus)
     {
@@ -63,8 +63,12 @@ class Task
         return $this->nextStatus[$action] ?? null;
     }
 
-    public function getNextAction(string $status, $user)
+    public function getAvailableAction(string $status, $user): ?AbstractAction
     {
-        return $this->nextAction[$status][$user] ?? null;
+        if (!isset($this->nextAction[$status][$user])) {
+            return null;
+        }
+
+        return new $this->nextAction[$status][$user];
     }
 }
