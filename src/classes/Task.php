@@ -17,14 +17,14 @@ class Task
 
     const ROLE_IMPLEMENT = 'implementer'; // Исполнитель
     const ROLE_CUSTOMER = 'customer'; // Заказчик
-    protected $statusNames = [
+    const STATUS_TITLE = [
         self::STATUS_NEW => 'Новое',
         self::STATUS_IN_WORK => 'В работе',
         self::STATUS_DONE => 'Выполнено',
         self::STATUS_FAILED => 'Провалено',
         self::STATUS_CANCEL => 'Отменено',
     ];
-    protected $actionNames = [
+    const ACTION_TITLE = [
         self::ACTION_CANCEL => 'Отменить',
         self::ACTION_ANSWER => 'Откликнуться',
         self::ACTION_FINISHED => 'Выполнено',
@@ -32,13 +32,13 @@ class Task
         self::ACTION_ACCEPT => 'Принять'
     ];
 
-    protected $NextStatus = [
+    const NEXT_STATUS = [
         self::ACTION_CANCEL => self::STATUS_CANCEL,
         self::ACTION_FINISHED => self::STATUS_DONE,
         self::ACTION_DECLINE => self::STATUS_FAILED,
         self::ACTION_ACCEPT => self::STATUS_IN_WORK,
         ];
-    protected $nextAction = [
+    const NEXT_ACTION = [
         self::STATUS_NEW => [
             self::ROLE_IMPLEMENT => ActionRespond::class,
             self::ROLE_CUSTOMER => ActionCancel::class
@@ -58,17 +58,21 @@ class Task
         $this->idStatus = $idStatus;
     }
 
-    public function getNextStatus(string $action)
+    public function getNextStatus(string $action) : ?string
     {
-        return $this->nextStatus[$action] ?? null;
+        if (!self::ACTION_TITLE[$action]) {
+                throw new CheckException("Нет действия: {$action}!");
+        }
+
+        return self::NEXT_STATUS[$action] ?? null;
     }
 
     public function getAvailableAction(string $status, $user): ?AbstractAction
     {
-        if (!isset($this->nextAction[$status][$user])) {
+        if (!isset(self::NEXT_ACTION[$status][$user])) {
             return null;
         }
 
-        return new $this->nextAction[$status][$user];
+        return new (self::NEXT_ACTION[$status][$user]);
     }
 }
