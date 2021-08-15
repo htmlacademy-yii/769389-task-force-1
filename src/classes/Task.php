@@ -2,12 +2,12 @@
 namespace TaskForce\classes;
 class Task
 {
-    // Стастусы задания
+    // Статусы задания
     const STATUS_NEW = 'new'; // Новое
     const STATUS_IN_WORK = 'in_work'; // В работе
     const STATUS_DONE = 'done'; // Выполнено
     const STATUS_FAILED = 'failed'; // Провалено
-    const STATUS_CANCEL = 'cancel'; // Отмененомф
+    const STATUS_CANCEL = 'cancel'; // Отменено
     // Действия с заданием
     const ACTION_CANCEL = 'cancel'; // Отменить задание( Заказчик)
     const ACTION_ANSWER = 'answer'; // Откликнуться на задание(Исполнитель)
@@ -37,16 +37,6 @@ class Task
         self::ACTION_FINISHED => self::STATUS_DONE,
         self::ACTION_DECLINE => self::STATUS_FAILED,
         self::ACTION_ACCEPT => self::STATUS_IN_WORK,
-        ];
-    const NEXT_ACTION = [
-        self::STATUS_NEW => [
-            self::ROLE_IMPLEMENT => ActionRespond::class,
-            self::ROLE_CUSTOMER => ActionCancel::class
-        ],
-        self::STATUS_IN_WORK => [
-            self::ROLE_IMPLEMENT => ActionReject::class,
-            self::ROLE_CUSTOMER => ActionComplete::class
-        ],
     ];
 
     protected int $idTask;
@@ -61,18 +51,19 @@ class Task
     public function getNextStatus(string $action) : ?string
     {
         if (!self::ACTION_TITLE[$action]) {
-                throw new CheckException("Нет действия: {$action}!");
+            throw new CheckException("Нет действия: {$action}!");
         }
 
         return self::NEXT_STATUS[$action] ?? null;
     }
 
-    public function getAvailableAction(string $status, $user): ?AbstractAction
+    public function getAvailableAction(string $status): array
     {
-        if (!isset(self::NEXT_ACTION[$status][$user])) {
-            return null;
-        }
+        $actionsMap = [
+            self::STATUS_NEW => [new ActionRespond(), new ActionCancel()],
+            self::STATUS_IN_WORK => [new ActionReject(), new ActionComplete()],
+        ];
 
-        return new (self::NEXT_ACTION[$status][$user]);
+        return $actionsMap[$status] ?? [];
     }
 }
