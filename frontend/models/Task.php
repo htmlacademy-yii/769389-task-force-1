@@ -18,6 +18,8 @@ use Yii;
  * @property string|null $deadline
  * @property int $user_id
  * @property int $executor_id
+ * @property Category $category
+ * @property City $city
  */
 class Task extends \yii\db\ActiveRecord
 {
@@ -62,4 +64,15 @@ class Task extends \yii\db\ActiveRecord
             'executor_id' => 'Executor ID',
         ];
     }
+
+    public function getCategory()
+    {
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+
+    public function getCity()
+    {
+        return $this->hasOne(City::class, ['id' => 'city_id']);
+    }
+
 }

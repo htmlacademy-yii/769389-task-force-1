@@ -77,3 +77,10 @@ CREATE TABLE `message` (
             `user_id` INT(11) NOT NULL,
             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
+
+CREATE TABLE `users_categories` (
+            `id` INT(11) NOT NULL AUTO_INCREMENT,
+            `category_id` INT(11) NOT NULL,
+            `user_id` INT(11) NOT NULL,
+            PRIMARY KEY (`id`)
+) ENGINE = InnoDB;

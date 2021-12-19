@@ -3,20 +3,20 @@ namespace TaskForce\classes;
 class Task
 {
     // Статусы задания
-    const STATUS_NEW = 'new'; // Новое
-    const STATUS_IN_WORK = 'in_work'; // В работе
-    const STATUS_DONE = 'done'; // Выполнено
-    const STATUS_FAILED = 'failed'; // Провалено
-    const STATUS_CANCEL = 'cancel'; // Отменено
+    const STATUS_NEW = 1; // Новое
+    const STATUS_IN_WORK = 2; // В работе
+    const STATUS_DONE = 3; // Выполнено
+    const STATUS_FAILED = 4; // Провалено
+    const STATUS_CANCEL = 5; // Отменено
     // Действия с заданием
-    const ACTION_CANCEL = 'cancel'; // Отменить задание( Заказчик)
+    const ACTION_CANCEL = 'cancel'; // Отменить задание(Заказчик)
     const ACTION_ANSWER = 'answer'; // Откликнуться на задание(Исполнитель)
     const ACTION_FINISHED = 'finished'; //  Задание выполнено(Заказчик)
     const ACTION_DECLINE = 'decline'; // Отказаться от задания(Исполнитель)
     const ACTION_ACCEPT = 'accept'; // Принять отклик от исполнителя(Заказчик)
 
-    const ROLE_IMPLEMENT = 'implementer'; // Исполнитель
-    const ROLE_CUSTOMER = 'customer'; // Заказчик
+    const ROLE_IMPLEMENT = '1'; // Исполнитель
+    const ROLE_CUSTOMER = '0'; // Заказчик
     const STATUS_TITLE = [
         self::STATUS_NEW => 'Новое',
         self::STATUS_IN_WORK => 'В работе',
