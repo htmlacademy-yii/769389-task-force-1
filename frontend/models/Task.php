@@ -18,6 +18,9 @@ use Yii;
  * @property string|null $deadline
  * @property int $user_id
  * @property int $executor_id
+ * @property string $pub_date
+ * @property Category $category
+ * @property City $city
  */
 class Task extends \yii\db\ActiveRecord
 {
@@ -37,7 +40,7 @@ class Task extends \yii\db\ActiveRecord
         return [
             [['title', 'details', 'category_id', 'status_id', 'user_id', 'executor_id'], 'required'],
             [['category_id', 'city_id', 'status_id', 'price_task', 'user_id', 'executor_id'], 'integer'],
-            [['deadline'], 'safe'],
+            [['deadline', 'pub_date'], 'safe'],
             [['title', 'link'], 'string', 'max' => 100],
             [['details'], 'string', 'max' => 250],
         ];
@@ -60,6 +63,18 @@ class Task extends \yii\db\ActiveRecord
             'deadline' => 'Deadline',
             'user_id' => 'User ID',
             'executor_id' => 'Executor ID',
+            'pub_date' => 'Pub Date',
         ];
     }
+
+    public function getCategory()
+    {
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+
+    public function getCity()
+    {
+        return $this->hasOne(City::class, ['id' => 'city_id']);
+    }
+
 }

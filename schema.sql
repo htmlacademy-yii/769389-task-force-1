@@ -45,6 +45,7 @@ CREATE TABLE `task` (
             `deadline` DATE NULL,
             `user_id` INT(11) NOT NULL,
             `executor_id` INT(11) NOT NULL,
+            `pub_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
@@ -77,3 +78,10 @@ CREATE TABLE `message` (
             `user_id` INT(11) NOT NULL,
             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
+
+CREATE TABLE `users_categories` (
+            `id` INT(11) NOT NULL AUTO_INCREMENT,
+            `category_id` INT(11) NOT NULL,
+            `user_id` INT(11) NOT NULL,
+            PRIMARY KEY (`id`)
+) ENGINE = InnoDB;

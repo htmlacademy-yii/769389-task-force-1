@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\base\InvalidConfigException;
 
 /**
  * This is the model class for table "user".
@@ -18,6 +19,7 @@ use Yii;
  * @property string $password
  * @property int $city_id
  * @property int $role_id
+ * @property Category $categories
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -64,4 +66,14 @@ class User extends \yii\db\ActiveRecord
             'role_id' => 'Role ID',
         ];
     }
+
+    /**
+     * @throws InvalidConfigException
+     */
+    public function getCategories()
+    {
+        return $this->hasMany(Category::class, ['id' => 'category_id'])
+            ->viaTable('users_categories', ['user_id' => 'id']);
+    }
+
 }
