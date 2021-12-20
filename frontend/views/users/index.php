@@ -15,11 +15,7 @@
                     </li>
                 </ul>
             </div>
-<<<<<<< HEAD
             <?php foreach ($users as $user): ?>
-=======
-            <?php foreach ($users as $id => $user): ?>
->>>>>>> aee8d4a41664df20758c33ad022b217d51e339c1
             <div class="content-view__feedback-card user__search-wrapper">
                 <div class="feedback-card__top">
                     <div class="user__search-icon">

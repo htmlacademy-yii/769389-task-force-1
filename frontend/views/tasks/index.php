@@ -3,11 +3,7 @@
         <section class="new-task">
             <div class="new-task__wrapper">
                 <h1>Новые задания</h1>
-<<<<<<< HEAD
                 <?php foreach ($tasks as $task): ?>
-=======
-                <?php foreach ($tasks as $id => $task): ?>
->>>>>>> aee8d4a41664df20758c33ad022b217d51e339c1
                 <div class="new-task__card">
                     <div class="new-task__title">
                         <a href="#" class="link-regular"><h2><?= $task->title ?></h2></a>
