@@ -1,5 +1,5 @@
 <?php
-namespace TaskForce\classes;
+namespace app;
 class Task
 {
     // Статусы задания
